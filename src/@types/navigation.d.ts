@@ -1,8 +1,21 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
+import { Collection } from "../services/collections";
+import { RouteProp } from "@react-navigation/core";
 
 export type DrawerParamList = {
   Home?: undefined;
+  CreateOrUpdateCollection?: {
+    collection: Collection;
+  };
+  Cards: {
+    collection: Collection;
+  };
 };
+
+export type DrawerRouteParams<T extends keyof DrawerParamList> = RouteProp<
+  DrawerParamList,
+  T
+>;
 
 export type AppStackParamList = {
   Login: undefined;

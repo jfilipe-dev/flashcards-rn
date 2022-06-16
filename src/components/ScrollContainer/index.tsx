@@ -5,14 +5,20 @@ import {
 } from "react-native-iphone-x-helper";
 import styled from "styled-components/native";
 
-const ScrollContainer = styled(ScrollView).attrs({
-  contentContainerStyle: {
-    paddingHorizontal: 20,
-    paddingTop: getStatusBarHeight() + 20,
-    paddingBottom: getBottomSpace() + 20,
-    flexGrow: 1,
-  },
-})`
+interface ScrollContainerProps {
+  full?: boolean;
+}
+
+const ScrollContainer = styled(ScrollView).attrs<ScrollContainerProps>(
+  ({ full = true }) => ({
+    contentContainerStyle: {
+      paddingHorizontal: 20,
+      paddingTop: getStatusBarHeight() + (full ? 20 : 0),
+      paddingBottom: getBottomSpace() + 20,
+      flexGrow: 1,
+    },
+  })
+)<ScrollContainerProps>`
   background-color: ${({ theme }) => theme.palette.background};
 `;
 

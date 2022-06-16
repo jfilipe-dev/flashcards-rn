@@ -4,7 +4,6 @@ import {
 } from "@react-navigation/stack";
 import React from "react";
 import { AppStackParamList } from "../../@types/navigation";
-import { stackHeaderOptions } from "../../components/Header";
 import InitialLoading from "../../screens/InitialLoading";
 import Login from "../../screens/Login";
 import Register from "../../screens/Register";
@@ -23,14 +22,13 @@ const AppNavigation: React.FC = () => {
     >
       <Screen name="InitialLoading" component={InitialLoading} />
       <Screen name="Login" component={Login} />
+      <Screen name="Drawer" component={DrawerNavigation} />
       <Group
         screenOptions={{
           ...TransitionPresets.ModalSlideFromBottomIOS,
         }}
       >
         <Screen name="Register" component={Register} />
-
-        <Screen name="Drawer" component={DrawerNavigation} />
       </Group>
     </Navigator>
   );

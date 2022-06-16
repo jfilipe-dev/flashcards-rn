@@ -1,6 +1,13 @@
 import React, { useCallback } from "react";
 import { FlatList, FlatListProps, StyleProp, ViewStyle } from "react-native";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 import styled from "styled-components/native";
+import LoadingPage from "../components/LoadingPage";
+
+interface ListProps<T> extends FlatListProps<T> {
+  loading?: boolean;
+  loadingText?: string;
+}
 
 function useFlatList<T = any>() {
   const List = styled(
@@ -11,6 +18,7 @@ function useFlatList<T = any>() {
         contentContainerStyle: {
           flexGrow: 1,
           padding: 20,
+          paddingBottom: getBottomSpace() + 20,
         },
       } as StyleProp<ViewStyle>)
   )`
@@ -23,13 +31,20 @@ function useFlatList<T = any>() {
 
   const keyExtractor = useCallback((item: T, index: number) => `${index}`, []);
 
-  return (props: FlatListProps<T>) => (
-    <List
-      keyExtractor={keyExtractor}
-      ItemSeparatorComponent={() => <Separator />}
-      {...props}
-    />
-  );
+  return (props: ListProps<T>) => {
+    const { loading, loadingText, ...rest } = props;
+
+    return (
+      <List
+        keyExtractor={keyExtractor}
+        ItemSeparatorComponent={() => <Separator />}
+        ListEmptyComponent={() =>
+          loading && <LoadingPage title={loadingText} />
+        }
+        {...rest}
+      />
+    );
+  };
 }
 
 export default useFlatList;

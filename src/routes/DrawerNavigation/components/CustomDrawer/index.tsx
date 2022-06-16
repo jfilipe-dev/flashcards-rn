@@ -39,6 +39,7 @@ export default function CustomDrawer(props: DrawerContentComponentProps) {
       <DrawerItem
         label="Minhas coleções"
         activeTintColor={palette.white}
+        inactiveTintColor={palette.white}
         focused={name === "Home"}
         icon={() => (
           <Entypo name="add-to-list" size={24} color={palette.white} />

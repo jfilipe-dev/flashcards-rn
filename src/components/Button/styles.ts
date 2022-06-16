@@ -1,8 +1,9 @@
 import { TouchableOpacity } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 interface ContainerProps {
   color: string;
+  outline?: boolean;
 }
 
 export const Container = styled(TouchableOpacity)<ContainerProps>`
@@ -13,6 +14,12 @@ export const Container = styled(TouchableOpacity)<ContainerProps>`
   align-items: center;
   justify-content: center;
   min-height: 52px;
+  ${(props) =>
+    props.outline &&
+    css`
+      border-width: 1px;
+      border-color: ${({ theme }) => theme.palette.white};
+    `}
 `;
 
 export const Label = styled.Text`

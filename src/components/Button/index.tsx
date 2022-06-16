@@ -6,11 +6,11 @@ import { Container, Label } from "./styles";
 
 interface Props extends TouchableOpacityProps {
   label: string;
-  type?: "error" | "success" | "primary" | "secondary";
+  type?: "error" | "success" | "primary" | "secondary" | "outline";
   loading?: boolean;
 }
 
-const Button = ({ type, label, style, loading, ...rest }: Props) => {
+const Button = ({ type, label, loading, ...rest }: Props) => {
   const { palette } = useTheme();
 
   const color = useMemo(() => {
@@ -23,13 +23,20 @@ const Button = ({ type, label, style, loading, ...rest }: Props) => {
         return palette.primary;
       case "secondary":
         return palette.secondary;
+      case "outline":
+        return palette.background;
       default:
         return palette.primary;
     }
   }, [palette]);
 
   return (
-    <Container color={color} disabled={loading} {...rest}>
+    <Container
+      color={color}
+      disabled={loading}
+      outline={type === "outline"}
+      {...rest}
+    >
       {loading ? (
         <ActivityIndicator size="small" color="#fff" />
       ) : (

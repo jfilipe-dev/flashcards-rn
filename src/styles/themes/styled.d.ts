@@ -1,19 +1,7 @@
 import "styled-componets";
 
+import { Theme } from "./default";
+
 declare module "styled-components" {
-  export interface DefaultTheme {
-    palette: {
-      background: string;
-      primary: string;
-      secondary: string;
-      primaryLight: string;
-      backgroundLight: string;
-      white: string;
-      gray: string;
-      error: string;
-      green: string;
-      highlight: string;
-      blue: string;
-    };
-  }
+  export interface DefaultTheme extends Theme {}
 }

@@ -18,7 +18,16 @@ const CollectionItem = ({ data, deleteCollection }: CollectionItemProps) => {
   const { palette } = useTheme();
 
   return (
-    <Container>
+    <Container
+      onPress={() =>
+        navigate("Drawer", {
+          screen: "Cards",
+          params: {
+            collection: data,
+          },
+        })
+      }
+    >
       <Image source={{ uri: data.image }} resizeMode="contain" />
       <Title>{data.name}</Title>
       <Actions>

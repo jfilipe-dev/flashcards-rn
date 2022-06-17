@@ -17,8 +17,14 @@ export const Container = styled(TouchableOpacity)<ContainerProps>`
   ${(props) =>
     props.outline &&
     css`
-      border-width: 1px;
+      border-width: 2px;
       border-color: ${({ theme }) => theme.palette.white};
+    `}
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      opacity: 0.5;
     `}
 `;
 

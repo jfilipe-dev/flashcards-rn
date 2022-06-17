@@ -28,7 +28,7 @@ const Button = ({ type, label, loading, ...rest }: Props) => {
       default:
         return palette.primary;
     }
-  }, [palette]);
+  }, [palette, type]);
 
   return (
     <Container

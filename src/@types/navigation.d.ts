@@ -1,5 +1,6 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { Collection } from "../services/collections";
+import { Card } from "../services/cards";
 import { RouteProp } from "@react-navigation/core";
 
 export type DrawerParamList = {
@@ -9,6 +10,10 @@ export type DrawerParamList = {
   };
   Cards: {
     collection: Collection;
+  };
+  CreateOrUpdateCard: {
+    collection: Collection;
+    card?: Card;
   };
 };
 

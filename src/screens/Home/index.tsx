@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Text } from "react-native";
 import { useAuth } from "../../context/useAuth";
 import useFlatList from "../../hooks/useFlatlist";
-import { Ionicons } from "@expo/vector-icons";
 
 import CollectionItem from "./components/Collection";
 import {
@@ -11,9 +10,9 @@ import {
   deleteCollection,
 } from "../../services/collections";
 
-import { CreateCollectionButton } from "./styles";
 import { useTheme } from "styled-components";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import FloatButton from "../../components/FloatButton";
 
 const Home: React.FC = () => {
   const { navigate } = useNavigation();
@@ -64,13 +63,11 @@ const Home: React.FC = () => {
         )}
       />
 
-      <CreateCollectionButton
+      <FloatButton
         onPress={() =>
           navigate("Drawer", { screen: "CreateOrUpdateCollection" })
         }
-      >
-        <Ionicons name="md-add-outline" size={38} color={palette.white} />
-      </CreateCollectionButton>
+      />
     </>
   );
 };

@@ -7,6 +7,7 @@ import { drawerHeaderOptions } from "../../components/Header";
 import CreateOrUpdateCollection from "../../screens/CreateOrUpdateCollection";
 import Cards from "../../screens/Cards";
 import CreateOrUpdateCard from "../../screens/CreateOrUpdateCard";
+import Play from "../../screens/Play";
 
 const { Navigator, Screen } = createDrawerNavigator<DrawerParamList>();
 
@@ -36,6 +37,8 @@ const DrawerNavigation: React.FC = () => {
       <Screen name="Cards" component={Cards} />
 
       <Screen name="CreateOrUpdateCard" component={CreateOrUpdateCard} />
+
+      <Screen name="Play" component={Play} />
     </Navigator>
   );
 };

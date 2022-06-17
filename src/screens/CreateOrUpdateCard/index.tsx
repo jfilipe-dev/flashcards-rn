@@ -13,6 +13,7 @@ import {
   FlashCard,
   Separator,
   FaceInput,
+  Face,
 } from "./styles";
 
 const CreateOrUpdateCard: React.FC = () => {
@@ -74,15 +75,25 @@ const CreateOrUpdateCard: React.FC = () => {
 
       <Container>
         <FlashCard>
-          <FaceLabel>Frente</FaceLabel>
-          <FaceInput
-            placeholder="Frente"
-            value={front}
-            onChangeText={setFront}
-          />
+          <Face>
+            <FaceLabel>Frente</FaceLabel>
+            <FaceInput
+              placeholder="Frente"
+              value={front}
+              onChangeText={setFront}
+            />
+          </Face>
+
           <Separator />
-          <FaceLabel>Verso</FaceLabel>
-          <FaceInput placeholder="Verso" value={back} onChangeText={setBack} />
+
+          <Face>
+            <FaceLabel>Verso</FaceLabel>
+            <FaceInput
+              placeholder="Verso"
+              value={back}
+              onChangeText={setBack}
+            />
+          </Face>
         </FlashCard>
 
         <Button

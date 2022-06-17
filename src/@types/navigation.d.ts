@@ -15,6 +15,10 @@ export type DrawerParamList = {
     collection: Collection;
     card?: Card;
   };
+  Play: {
+    collection: Collection;
+    cards: Card[];
+  };
 };
 
 export type DrawerRouteParams<T extends keyof DrawerParamList> = RouteProp<

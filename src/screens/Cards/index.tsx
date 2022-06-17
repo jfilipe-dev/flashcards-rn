@@ -34,7 +34,20 @@ const Cards = () => {
     return (
       <>
         <Input label="Filtro" value={search} onChangeText={setSearch} />
-        <PlayButton label="Jogar" type="success" disabled={!cards.length} />
+        <PlayButton
+          label="Jogar"
+          type="success"
+          disabled={!cards.length}
+          onPress={() => {
+            navigate("Drawer", {
+              screen: "Play",
+              params: {
+                cards,
+                collection,
+              },
+            });
+          }}
+        />
       </>
     );
   }, [search, cards]);
@@ -62,7 +75,7 @@ const Cards = () => {
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: `Coleção - ${collection.name}`,
+      headerTitle: `Cartões - ${collection.name}`,
     });
   }, [collection]);
 

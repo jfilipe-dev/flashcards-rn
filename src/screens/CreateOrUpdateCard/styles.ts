@@ -36,6 +36,10 @@ export const Separator = styled.View`
   border-radius: 2px;
 `;
 
+export const Face = styled.View`
+  min-height: 178px;
+`;
+
 export const FaceInput = styled.TextInput.attrs({
   multiline: true,
   scrollEnabled: false,
@@ -44,5 +48,7 @@ export const FaceInput = styled.TextInput.attrs({
   color: ${({ theme }) => theme.palette.background};
   text-align: center;
   font-weight: 600;
-  padding: 46px 0;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
 `;

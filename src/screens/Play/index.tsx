@@ -50,7 +50,7 @@ const Play = () => {
 
   useLayoutEffect(() => {
     setOptions({
-      headerTitle: `Jogar - ${collection.name}`,
+      headerTitle: `Jogando - ${collection.name}`,
     });
   }, [collection]);
 

@@ -41,7 +41,7 @@ const CollectionItem = ({ data, deleteCollection }: CollectionItemProps) => {
   return (
     <>
       <Container onPress={handleNavigateToCardsCollection}>
-        <Image source={{ uri: data.image }} resizeMode="contain" />
+        <Image source={{ uri: data.imageUrl }} resizeMode="contain" />
         <Title>{data.name}</Title>
         <Actions>
           <Entypo

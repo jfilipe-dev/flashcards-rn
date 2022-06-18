@@ -6,10 +6,22 @@ import { addNewCollection, updateCollection } from "../../services/collections";
 import { useAuth } from "../../context/useAuth";
 import getValiationErros from "../../utils/getValiationErros";
 import ScrollContainer from "../../components/ScrollContainer";
-
-import { Container, Title, CancelButton } from "./styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTheme } from "styled-components";
+import * as ImagePicker from "expo-image-picker";
+
+import {
+  Container,
+  Title,
+  CancelButton,
+  SelectImage,
+  SelectImageLabel,
+  EmptyImageContainer,
+  Image,
+} from "./styles";
+import { uploadImage } from "../../services/image";
 
 interface Errors {
   name?: string;
@@ -20,10 +32,10 @@ interface Errors {
 const schema = Yup.object().shape({
   name: Yup.string().required("O nome é obrigatório"),
   description: Yup.string().required("A descrição é obrigatória"),
-  image: Yup.string().required("A imagem é obrigatória"),
 });
 
 const CreateOrUpdateCollection: React.FC = () => {
+  const { palette } = useTheme();
   const { setOptions, goBack } = useNavigation();
   const { params } = useRoute<DrawerRouteParams<"CreateOrUpdateCollection">>();
 
@@ -33,7 +45,7 @@ const CreateOrUpdateCollection: React.FC = () => {
   const [description, setDescription] = useState(
     params?.collection.description || ""
   );
-  const [image, setImage] = useState(params?.collection.image || "");
+  const [image, setImage] = useState(params?.collection.imageUrl || "");
 
   const [errors, setErrors] = useState<Errors>({});
   const [loading, setLoading] = useState(false);
@@ -56,20 +68,44 @@ const CreateOrUpdateCollection: React.FC = () => {
     return "Cadastrar";
   }, [params?.collection]);
 
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      base64: true,
+      quality: 0,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   const handleSubmit = async () => {
     setLoading(true);
     setErrors({});
 
-    const data = {
+    const collection = params?.collection;
+
+    const imageName = collection
+      ? collection.imageName
+      : `${name.toLocaleLowerCase}-${Date.now()}-${currentUser?.email}`;
+
+    const dataToValidade = {
       name,
       description,
-      image,
     };
-
     try {
-      await schema.validate(data, {
+      await schema.validate(dataToValidade, {
         abortEarly: false,
       });
+
+      const imageUrl = await uploadImage(image, imageName);
+
+      const data = {
+        ...dataToValidade,
+        imageUrl,
+        imageName,
+      };
 
       if (params?.collection) {
         await updateCollection(params.collection.id, data);
@@ -79,6 +115,10 @@ const CreateOrUpdateCollection: React.FC = () => {
 
       goBack();
     } catch (error) {
+      console.log(
+        "🚀 ~ file: index.tsx ~ line 113 ~ handleSubmit ~ error",
+        error
+      );
       if (error instanceof Yup.ValidationError) {
         const errorsValidate = getValiationErros(error);
         setErrors(errorsValidate);
@@ -113,12 +153,21 @@ const CreateOrUpdateCollection: React.FC = () => {
           onChangeText={setDescription}
           error={errors.description}
         />
-        <Input
-          label="Imagem"
-          value={image}
-          onChangeText={setImage}
-          error={errors.image}
-        />
+        <SelectImage onPress={pickImage}>
+          <SelectImageLabel>Imagem</SelectImageLabel>
+
+          {image ? (
+            <Image source={{ uri: image }} />
+          ) : (
+            <EmptyImageContainer>
+              <MaterialCommunityIcons
+                name="image-plus"
+                size={48}
+                color={palette.gray}
+              />
+            </EmptyImageContainer>
+          )}
+        </SelectImage>
 
         <Button label={buttonLabel} onPress={handleSubmit} loading={loading} />
       </Container>

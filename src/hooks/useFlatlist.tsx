@@ -20,7 +20,7 @@ function useFlatList<T = any>() {
         contentContainerStyle: {
           flexGrow: 1,
           padding: 20,
-          paddingBottom: getBottomSpace() + 20,
+          paddingBottom: getBottomSpace() + 20 + 100,
         },
       } as StyleProp<ViewStyle>)
   )`
@@ -40,6 +40,7 @@ function useFlatList<T = any>() {
       return (
         <List
           keyExtractor={keyExtractor}
+          showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <Separator />}
           ListEmptyComponent={() => {
             if (loading) {

@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components";
 import { AuthProvider } from "./src/context/useAuth";
 import AppNavigation from "./src/routes/AppNavigation";
@@ -13,10 +13,14 @@ LogBox.ignoreLogs([
 ]);
 
 export default function App() {
+  const theme = DefaultTheme;
+
+  theme.colors.background = defaultTheme.palette.background;
+
   return (
     <AuthProvider>
       <ThemeProvider theme={defaultTheme}>
-        <NavigationContainer>
+        <NavigationContainer theme={theme}>
           <StatusBar translucent style="light" />
           <AppNavigation />
         </NavigationContainer>

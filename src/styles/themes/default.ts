@@ -18,10 +18,11 @@ const shadow = Platform.select({
 }) as GenericProps;
 
 const palette = {
-  background: "#2C2A4A",
+  background: "#42415C",
   backgroundLight: "#403E5B",
+  backgroundDark: "#2C2A4A",
   secondary: "#A57985",
-  primary: "#716CC8",
+  primary: "#7872AB",
   primaryLight: "#4600D3",
   white: "#fff",
   gray: "#8E8E8E",

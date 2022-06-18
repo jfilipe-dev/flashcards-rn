@@ -1,22 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Text } from "react-native";
+import React, { useCallback, useState } from "react";
 import { useAuth } from "../../context/useAuth";
 import useFlatList from "../../hooks/useFlatlist";
 
-import CollectionItem from "./components/Collection";
 import {
   Collection,
-  getCollections,
   deleteCollection,
+  getCollections,
 } from "../../services/collections";
+import CollectionItem from "./components/Collection";
 
-import { useTheme } from "styled-components";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import FloatButton from "../../components/FloatButton";
 
 const Home: React.FC = () => {
   const { navigate } = useNavigation();
-  const { palette } = useTheme();
   const { currentUser } = useAuth();
   const List = useFlatList<Collection>();
 
@@ -55,6 +52,7 @@ const Home: React.FC = () => {
         data={loading ? [] : collections}
         loading={loading}
         loadingText="Carregando coleções..."
+        emptyText="Você ainda não tem nenhuma coleção"
         renderItem={({ item }) => (
           <CollectionItem
             data={item}

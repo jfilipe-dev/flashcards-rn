@@ -8,10 +8,7 @@ export const stackHeaderOptions: StackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: "center",
   headerTintColor: "#fff",
-  headerStatusBarHeight:
-    Platform.OS === "android"
-      ? getStatusBarHeight() - 4
-      : getStatusBarHeight(true) + 9,
+  headerStatusBarHeight: getStatusBarHeight(true) + 9,
   headerLeft: () => null,
   headerRight: () => null,
   headerBackground: () => <HeaderBackground />,
@@ -26,5 +23,5 @@ export const drawerHeaderOptions: DrawerNavigationOptions = {
     Platform.OS === "android"
       ? getStatusBarHeight()
       : getStatusBarHeight(true) + 9,
-  headerBackground: () => <HeaderBackground />,
+  headerBackground: () => <HeaderBackground drawer />,
 };

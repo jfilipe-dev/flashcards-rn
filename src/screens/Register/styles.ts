@@ -5,5 +5,5 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.palette.white};
   font-weight: 600;
   text-align: center;
-  margin: 40px 0;
+  margin: 20px 0 40px;
 `;

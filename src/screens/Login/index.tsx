@@ -6,7 +6,8 @@ import ScrollContainer from "../../components/ScrollContainer";
 import * as Yup from "yup";
 import { useAuth } from "../../context/useAuth";
 import getValiationErros from "../../utils/getValiationErros";
-import { Container, RegisterButton } from "./styles";
+import { Container, RegisterButton, Image } from "./styles";
+import LoginIcon from "../../assets/LoginIcon.png";
 
 interface Errors {
   email?: string;
@@ -67,6 +68,8 @@ const Login: React.FC = () => {
 
   return (
     <ScrollContainer bounces={false}>
+      <Image source={LoginIcon} />
+
       <Container>
         <Input
           label="E-mail"

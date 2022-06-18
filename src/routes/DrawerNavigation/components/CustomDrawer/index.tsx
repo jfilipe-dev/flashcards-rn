@@ -30,10 +30,15 @@ export default function CustomDrawer(props: DrawerContentComponentProps) {
       {...props}
       contentContainerStyle={{
         flexGrow: 1,
+        backgroundColor: palette.backgroundDark,
       }}
       style={{ backgroundColor: palette.background }}
     >
-      <Container />
+      <Container
+        source={{
+          uri: `https://avatars.dicebear.com/api/personas/${currentUser?.email}.png?flip=1`,
+        }}
+      />
       <UserName>{currentUser?.email}</UserName>
 
       <DrawerItem

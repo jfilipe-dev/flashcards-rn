@@ -101,6 +101,7 @@ const Cards = () => {
         )}
         loading={loading}
         loadingText="Carregando cartões..."
+        emptyText="Você ainda não tem nenhum cartão"
         ListHeaderComponent={renderHeader}
       />
 

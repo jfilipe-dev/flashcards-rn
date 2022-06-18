@@ -69,7 +69,7 @@ const Register: React.FC = () => {
   }
 
   return (
-    <ScrollContainer bounces={false}>
+    <ScrollContainer bounces={false} full={false}>
       <Title>Preencha os dados do seu cadastro</Title>
 
       <Input

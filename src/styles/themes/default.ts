@@ -26,7 +26,7 @@ const palette = {
   primaryLight: "#4600D3",
   white: "#fff",
   gray: "#8E8E8E",
-  error: "#FF0000",
+  error: "#ff686b",
   green: "#66946E",
   highlight: "#54A9A6",
   blue: "#4D72BE",

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, deleteObject } from "firebase/storage";
 import firebaseConfig from "../config/firebase";
 
 const app = initializeApp(firebaseConfig);
@@ -24,4 +24,9 @@ export const uploadImage = async (image: string, imageName: string) => {
     "?alt=media";
 
   return url;
+};
+
+export const deleteImage = async (imageName: string) => {
+  const imageRef = ref(storage, imageName);
+  await deleteObject(imageRef);
 };

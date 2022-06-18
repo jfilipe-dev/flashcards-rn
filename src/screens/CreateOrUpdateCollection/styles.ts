@@ -27,12 +27,18 @@ export const SelectImage = styled.TouchableOpacity.attrs({
   padding: 8px 12px;
   border-radius: 4px;
   background-color: ${({ theme }) => theme.palette.white};
-  margin-bottom: 20px;
 `;
 
 export const SelectImageLabel = styled.Text`
   font-size: 14px;
   color: ${({ theme }) => theme.palette.primaryLight};
+`;
+
+export const SelectImageError = styled.Text`
+  font-size: 14px;
+  color: ${({ theme }) => theme.palette.error};
+  margin-bottom: 20px;
+  margin-top: 2px;
 `;
 
 export const EmptyImageContainer = styled.View`

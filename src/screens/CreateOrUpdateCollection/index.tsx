@@ -20,6 +20,7 @@ import {
   SelectImageLabel,
   EmptyImageContainer,
   Image,
+  SelectImageError,
 } from "./styles";
 import { uploadImage } from "../../services/image";
 
@@ -32,6 +33,7 @@ interface Errors {
 const schema = Yup.object().shape({
   name: Yup.string().required("O nome é obrigatório"),
   description: Yup.string().required("A descrição é obrigatória"),
+  image: Yup.string().required("A imagem é obrigatória"),
 });
 
 const CreateOrUpdateCollection: React.FC = () => {
@@ -88,11 +90,12 @@ const CreateOrUpdateCollection: React.FC = () => {
 
     const imageName = collection
       ? collection.imageName
-      : `${name.toLocaleLowerCase}-${Date.now()}-${currentUser?.email}`;
+      : `${name.toLocaleLowerCase()}-${Date.now()}-${currentUser?.email}`;
 
     const dataToValidade = {
       name,
       description,
+      image,
     };
     try {
       await schema.validate(dataToValidade, {
@@ -102,7 +105,8 @@ const CreateOrUpdateCollection: React.FC = () => {
       const imageUrl = await uploadImage(image, imageName);
 
       const data = {
-        ...dataToValidade,
+        name,
+        description,
         imageUrl,
         imageName,
       };
@@ -168,6 +172,7 @@ const CreateOrUpdateCollection: React.FC = () => {
             </EmptyImageContainer>
           )}
         </SelectImage>
+        <SelectImageError>{errors.image}</SelectImageError>
 
         <Button label={buttonLabel} onPress={handleSubmit} loading={loading} />
       </Container>

@@ -11,6 +11,7 @@ import CollectionItem from "./components/Collection";
 
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import FloatButton from "../../components/FloatButton";
+import { deleteImage } from "../../services/image";
 
 const Home: React.FC = () => {
   const { navigate } = useNavigation();
@@ -22,9 +23,10 @@ const Home: React.FC = () => {
   const [collections, setCollections] = useState<Collection[]>([]);
 
   const handleDeleteCollection = useCallback(
-    async (id: string) => {
+    async (collection: Collection) => {
       setLoading(true);
-      await deleteCollection(id);
+      await deleteCollection(collection.id);
+      deleteImage(collection.imageName);
       if (currentUser?.email)
         getCollections(currentUser?.email)
           .then(setCollections)
@@ -56,7 +58,7 @@ const Home: React.FC = () => {
         renderItem={({ item }) => (
           <CollectionItem
             data={item}
-            deleteCollection={() => handleDeleteCollection(item.id)}
+            deleteCollection={() => handleDeleteCollection(item)}
           />
         )}
       />

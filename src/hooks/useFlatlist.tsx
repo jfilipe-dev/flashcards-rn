@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { FlatList, FlatListProps, StyleProp, ViewStyle } from "react-native";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 import styled from "styled-components/native";
